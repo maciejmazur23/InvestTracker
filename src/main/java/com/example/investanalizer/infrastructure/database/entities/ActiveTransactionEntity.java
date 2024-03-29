@@ -16,24 +16,23 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "ACTIVE_TRANSACTIONS")
 public class ActiveTransactionEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "active_transaction_id")
-    Long activeTransactionId;
+    private Long activeTransactionId;
 
     @Column(name = "ticker")
-    String ticker;
+    private String ticker;
 
     @Column(name = "quantity")
-    BigDecimal quantity;
+    private BigDecimal quantity;
 
     @Column(name = "course")
-    BigDecimal course;
+    private BigDecimal course;
 
     @Column(name = "total_value")
-    BigDecimal totalValue;
+    private BigDecimal totalValue;
 
     @Column(name = "date_of_transaction")
-    LocalDate dateOfTransaction;
+    private LocalDate dateOfTransaction;
 }

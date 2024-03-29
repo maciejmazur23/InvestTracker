@@ -1,9 +1,9 @@
 package com.example.investanalizer.infrastructure.database.repositories;
 
-import com.example.investanalizer.buisness.dao.ActiveTransactionsDao;
-import com.example.investanalizer.domain.ActiveTransaction;
+import com.example.investanalizer.domain.buisness.dao.ActiveTransactionsDao;
+import com.example.investanalizer.domain.objects.ActiveTransaction;
 import com.example.investanalizer.infrastructure.database.repositories.jpa.ActiveTransactionsJpaRepo;
-import com.example.investanalizer.infrastructure.database.repositories.mapper.ActiveTransactionMapper;
+import com.example.investanalizer.infrastructure.database.repositories.mapper.ActiveTransactionEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -14,25 +14,37 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ActiveTransactionsRepository implements ActiveTransactionsDao {
     private final ActiveTransactionsJpaRepo activeTransactionsJpaRepo;
-    private final ActiveTransactionMapper activeTransactionMapper;
+    private final ActiveTransactionEntityMapper activeTransactionEntityMapper;
 
     @Override
     public List<ActiveTransaction> findByTicker(String ticker) {
         return activeTransactionsJpaRepo.findByTicker(ticker).stream()
-                .map(activeTransactionMapper::mapFromEntity)
+                .map(activeTransactionEntityMapper::mapFromEntity)
                 .toList();
     }
 
     @Override
     public ActiveTransaction saveActiveTransaction(ActiveTransaction activeTransactionId) {
-        return activeTransactionMapper.mapFromEntity(activeTransactionsJpaRepo.save(
-                activeTransactionMapper.mapToEntity(activeTransactionId)
+        return activeTransactionEntityMapper.mapFromEntity(activeTransactionsJpaRepo.save(
+                activeTransactionEntityMapper.mapToEntity(activeTransactionId)
         ));
     }
 
     @Override
     public Optional<ActiveTransaction> findById(Long id) {
         return activeTransactionsJpaRepo.findById(id)
-                .map(activeTransactionMapper::mapFromEntity);
+                .map(activeTransactionEntityMapper::mapFromEntity);
+    }
+
+    @Override
+    public ActiveTransaction deleteById(Long id) {
+        return activeTransactionEntityMapper.mapFromEntity(activeTransactionsJpaRepo.deleteByActiveTransactionId(id));
+    }
+
+    @Override
+    public List<ActiveTransaction> findActiveTransactions() {
+        return activeTransactionsJpaRepo.findAll().stream()
+                .map(activeTransactionEntityMapper::mapFromEntity)
+                .toList();
     }
 }
