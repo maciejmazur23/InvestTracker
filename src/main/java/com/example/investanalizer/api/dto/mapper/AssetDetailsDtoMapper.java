@@ -9,11 +9,8 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AssetDetailsDtoMapper {
 
-    @Mapping(target = "historicalAsset", ignore = true)
-    @Mapping(target = "asset", ignore = true)
-    AssetDetails mapFromAssetDetailsDTO(AssetDetailsDTO dto);
+    @Mapping(target = "assetDetailsId", ignore = true)
+    AssetDetails mapFromDTO(AssetDetailsDTO dto);
 
-    @Mapping(target = "historicalAsset", ignore = true)
-    @Mapping(target = "asset", ignore = true)
-    AssetDetailsDTO mapToAssetDetailsDTO(AssetDetails assetDetails);
+    AssetDetailsDTO mapToDTO(AssetDetails assetDetails);
 }

@@ -23,9 +23,5 @@ public class AssetDetailsDTO {
     String fullName;
 
     @NotNull @Length(min = 2, max = 8)
-    String API_KEY;
-
-    AssetDTO asset;
-
-    HistoricalAssetDTO historicalAsset;
+    String apiKey;
 }

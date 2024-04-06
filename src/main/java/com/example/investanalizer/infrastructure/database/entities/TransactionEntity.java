@@ -22,9 +22,6 @@ public class TransactionEntity {
     @Column(name = "transactions_id")
     private Long transactionId;
 
-    @Column(name = "active_transaction_id")
-    private Long activeTransactionId;
-
     @Column(name = "transaction_type")
     private TRANSACTION_TYPE transactionType;
 

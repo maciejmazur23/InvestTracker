@@ -1,4 +1,4 @@
-package com.example.investanalizer.domain.buisness.managment.service.mapper;
+package com.example.investanalizer.domain.buisness.service.mapper;
 
 import com.example.investanalizer.domain.objects.Asset;
 import com.example.investanalizer.domain.objects.HistoricalAsset;
@@ -9,7 +9,7 @@ public class AssetToHistoricalMapper {
 
     public HistoricalAsset mapAssetToHistoricalAsset(Asset asset) {
         return HistoricalAsset.builder()
-                .assetDetails(asset.getAssetDetails())
+                .assetDetailsId(asset.getAssetDetailsId())
                 .quantity(asset.getQuantity())
                 .course(asset.getCourse())
                 .totalValue(asset.getTotalValue())

@@ -23,10 +23,6 @@ public class AssetDetails {
     @NotNull
     String fullName;
 
-    @NotNull @Length(min = 2, max = 8)
-    String API_KEY;
-
-    Asset asset;
-
-    HistoricalAsset historicalAsset;
+    @NotNull @Length(min = 2, max = 20)
+    String apiKey;
 }

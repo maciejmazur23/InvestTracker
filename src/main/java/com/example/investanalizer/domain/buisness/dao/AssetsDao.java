@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AssetsDao {
-    Optional<Asset> findByAssetDetailsId(Long assetDetailsId);
+    Optional<Asset> findAssetsByAssetDetailsId(Long assetDetailsId);
 
-    List<Asset> findAll();
+    List<Asset> findAllAssets();
 
     Optional<Asset> saveAsset(Asset asset);
 }

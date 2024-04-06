@@ -1,4 +1,4 @@
-package com.example.investanalizer.domain.buisness.managment.service;
+package com.example.investanalizer.domain.buisness.service;
 
 import com.example.investanalizer.domain.buisness.dao.AssetsDao;
 import com.example.investanalizer.domain.objects.Asset;
@@ -6,11 +6,13 @@ import com.example.investanalizer.domain.objects.AssetDetails;
 import com.example.investanalizer.domain.objects.Transaction;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AssetsServiceImpl implements AssetsService {
@@ -20,12 +22,12 @@ public class AssetsServiceImpl implements AssetsService {
     @Override
     @Transactional
     public List<Asset> findAllAssets() {
-        return assetsDao.findAll();
+        return assetsDao.findAllAssets();
     }
 
     @Override
-    public Optional<Asset> findByAssetDetailsId(Long assetDetailsId) {
-        return assetsDao.findByAssetDetailsId(assetDetailsId);
+    public Optional<Asset> findAssetsByAssetDetailsId(Long assetDetailsId) {
+        return assetsDao.findAssetsByAssetDetailsId(assetDetailsId);
     }
 
     @Override
@@ -36,18 +38,19 @@ public class AssetsServiceImpl implements AssetsService {
     @Override
     @Transactional
     public void updateAssets(Transaction transaction) {
-        Optional<AssetDetails> optionalAssetDetails = assetDetailsService.findByTicker(transaction.getTicker());
+        try{
+            Optional<AssetDetails> optionalAssetDetails = assetDetailsService.findAssetDetailsByTicker(transaction.getTicker());
 
-        if (optionalAssetDetails.isEmpty()) {
+            AssetDetails assetDetails = optionalAssetDetails.orElseThrow();
+            Optional<Asset> optionalAsset = findAssetsByAssetDetailsId(assetDetails.getAssetDetailsId());
+
+            switch (transaction.getTransactionType()) {
+                case SALE -> updateAssetsIfSale(transaction, optionalAsset);
+                case PURCHASE -> updateAssetsIfPurchase(transaction, assetDetails, optionalAsset);
+            }
+        }catch (Exception e){
+            log.error("Chosen asset not exist: {}", e.getMessage());
             throw new RuntimeException("Chosen asset not exist!");
-        }
-
-        AssetDetails assetDetails = optionalAssetDetails.get();
-        Optional<Asset> optionalAsset = findByAssetDetailsId(assetDetails.getAssetDetailsId());
-
-        switch (transaction.getTransactionType()) {
-            case SALE -> updateAssetsIfSale(transaction, optionalAsset);
-            case PURCHASE -> updateAssetsIfPurchase(transaction, assetDetails, optionalAsset);
         }
     }
 
@@ -56,7 +59,7 @@ public class AssetsServiceImpl implements AssetsService {
         Asset asset;
         if (optionalAsset.isEmpty()) {
             asset = Asset.builder()
-                    .assetDetails(assetDetails)
+                    .assetDetailsId(assetDetails.getAssetDetailsId())
                     .quantity(transaction.getQuantity())
                     .course(transaction.getCourse())
                     .totalValue(transaction.getQuantity().multiply(transaction.getCourse()))

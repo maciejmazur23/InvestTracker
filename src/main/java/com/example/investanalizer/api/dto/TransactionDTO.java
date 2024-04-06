@@ -17,7 +17,6 @@ import java.time.LocalDate;
 @ToString
 public class TransactionDTO {
     Long transactionId;
-    ActiveTransactionDTO activeTransaction;
     TRANSACTION_TYPE transactionType;
     @Size(min = 2, max = 6) String ticker;
     @NotNull BigDecimal quantity;

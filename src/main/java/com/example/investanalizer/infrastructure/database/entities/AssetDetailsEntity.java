@@ -29,11 +29,5 @@ public class AssetDetailsEntity {
     private String fullName;
 
     @Column(name = "api_key", unique = true)
-    private String API_KEY;
-
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "assetDetails")
-    private AssetEntity asset;
-
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "assetDetails")
-    private HistoricalAssetEntity historicalAsset;
+    private String apiKey;
 }

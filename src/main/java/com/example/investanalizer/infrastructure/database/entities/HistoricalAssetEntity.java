@@ -21,9 +21,8 @@ public class HistoricalAssetEntity {
     @Column(name = "asset_id")
     private Long assetId;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "asset_details_id")
-    private AssetDetailsEntity assetDetails;
+    @Column(name = "asset_details_id")
+    private Long assetDetailsId;
 
     @Column(name = "quantity")
     private BigDecimal quantity;

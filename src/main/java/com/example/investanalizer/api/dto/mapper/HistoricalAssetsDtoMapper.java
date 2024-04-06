@@ -7,6 +7,7 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface HistoricalAssetsDtoMapper {
+
     HistoricalAsset mapFromDTO(HistoricalAssetDTO dto);
 
     HistoricalAssetDTO mapToDTO(HistoricalAsset historicalDate);

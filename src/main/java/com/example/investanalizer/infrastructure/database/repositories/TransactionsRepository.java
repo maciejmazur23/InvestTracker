@@ -23,7 +23,7 @@ public class TransactionsRepository implements TransactionsDao {
     }
 
     @Override
-    public List<Transaction> findAll() {
+    public List<Transaction> findAllTransactions() {
         return transactionsJpaRepo.findAll().stream()
                 .map(transactionEntityMapper::mapFromEntity)
                 .toList();

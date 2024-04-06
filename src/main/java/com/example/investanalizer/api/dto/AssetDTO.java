@@ -8,10 +8,10 @@ import java.math.BigDecimal;
 @Value
 @Builder
 @ToString
-@EqualsAndHashCode(of = {"assetDetails"})
+@EqualsAndHashCode(of = {"assetDetailsId"})
 public class AssetDTO {
     Long assetId;
-    AssetDetailsDTO assetDetails;
+    Long assetDetailsId;
     BigDecimal quantity;
     BigDecimal course;
     BigDecimal totalValue;

@@ -17,13 +17,13 @@ public class AssetsRepository implements AssetsDao {
     private final AssetsEntityMapper assetsEntityMapper;
 
     @Override
-    public Optional<Asset> findByAssetDetailsId(Long assetDetailsId) {
+    public Optional<Asset> findAssetsByAssetDetailsId(Long assetDetailsId) {
         return assetsJpaRepo.findById(assetDetailsId)
                 .map(assetsEntityMapper::mapFromEntity);
     }
 
     @Override
-    public List<Asset> findAll() {
+    public List<Asset> findAllAssets() {
         return assetsJpaRepo.findAll().stream()
                 .map(assetsEntityMapper::mapFromEntity)
                 .toList();

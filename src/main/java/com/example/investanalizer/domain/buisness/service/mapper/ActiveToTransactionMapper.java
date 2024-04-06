@@ -1,4 +1,4 @@
-package com.example.investanalizer.domain.buisness.managment.service.mapper;
+package com.example.investanalizer.domain.buisness.service.mapper;
 
 import com.example.investanalizer.domain.objects.ActiveTransaction;
 import com.example.investanalizer.domain.objects.Transaction;
@@ -9,7 +9,6 @@ public class ActiveToTransactionMapper {
 
     public ActiveTransaction mapToActiveTransaction(Transaction transaction) {
         return ActiveTransaction.builder()
-                .activeTransactionId(transaction.getActiveTransactionId())
                 .ticker(transaction.getTicker())
                 .quantity(transaction.getQuantity())
                 .course(transaction.getCourse())
@@ -20,7 +19,6 @@ public class ActiveToTransactionMapper {
 
     public Transaction mapToTransaction(ActiveTransaction transaction) {
         return Transaction.builder()
-                .activeTransactionId(transaction.getActiveTransactionId())
                 .ticker(transaction.getTicker())
                 .quantity(transaction.getQuantity())
                 .course(transaction.getCourse())

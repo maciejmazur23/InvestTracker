@@ -7,5 +7,5 @@ import java.util.List;
 public interface TransactionsDao {
     Transaction saveTransaction(Transaction transaction);
 
-    List<Transaction> findAll();
+    List<Transaction> findAllTransactions();
 }

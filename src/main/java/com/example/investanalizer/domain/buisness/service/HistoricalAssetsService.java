@@ -1,4 +1,4 @@
-package com.example.investanalizer.domain.buisness.managment.service;
+package com.example.investanalizer.domain.buisness.service;
 
 import com.example.investanalizer.domain.objects.HistoricalAsset;
 import com.example.investanalizer.domain.objects.Transaction;

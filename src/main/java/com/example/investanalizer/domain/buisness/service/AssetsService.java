@@ -1,4 +1,4 @@
-package com.example.investanalizer.domain.buisness.managment.service;
+package com.example.investanalizer.domain.buisness.service;
 
 import com.example.investanalizer.domain.objects.Asset;
 import com.example.investanalizer.domain.objects.Transaction;
@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface AssetsService {
     List<Asset> findAllAssets();
 
-    Optional<Asset> findByAssetDetailsId(Long assetDetailsId);
+    Optional<Asset> findAssetsByAssetDetailsId(Long assetDetailsId);
 
     Optional<Asset> saveAsset(Asset asset);
 

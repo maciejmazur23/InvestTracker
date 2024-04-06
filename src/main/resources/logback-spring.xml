@@ -27,6 +27,7 @@
 
     <logger name="com.example.investanalizer" level="info" additivity="true">
         <appender-ref ref="FILE-ROLLING"/>
+        <appender-ref ref="CONSOLE"/>
     </logger>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -38,5 +39,6 @@
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-ROLLING"/>
     </root>
 </configuration>

@@ -17,7 +17,7 @@ public class AssetDetailsRepository implements AssetDetailsDao {
     private final AssetDetailsEntityMapper assetDetailsEntityMapper;
 
     @Override
-    public Optional<AssetDetails> findByTicker(String ticker) {
+    public Optional<AssetDetails> findAssetDetailsByTicker(String ticker) {
         return assetDetailsJpaRepo.findByTicker(ticker)
                 .map(assetDetailsEntityMapper::mapFromEntity);
     }
@@ -30,14 +30,19 @@ public class AssetDetailsRepository implements AssetDetailsDao {
     }
 
     @Override
-    public List<AssetDetails> findAll() {
+    public List<AssetDetails> findAllAssetDetails() {
         return assetDetailsJpaRepo.findAll().stream()
                 .map(assetDetailsEntityMapper::mapFromEntity)
                 .toList();
     }
 
     @Override
-    public Optional<AssetDetails> findById(Long id) {
+    public Optional<AssetDetails> findAssetDetailsById(Long id) {
         return assetDetailsJpaRepo.findById(id).map(assetDetailsEntityMapper::mapFromEntity);
+    }
+
+    @Override
+    public void deleteAssetDetailsById(Long id) {
+        assetDetailsJpaRepo.deleteById(id);
     }
 }

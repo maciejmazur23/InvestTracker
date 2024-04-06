@@ -9,5 +9,4 @@ import java.util.List;
 @Repository
 public interface ActiveTransactionsJpaRepo extends JpaRepository<ActiveTransactionEntity, Long> {
     List<ActiveTransactionEntity> findByTicker(String ticker);
-    ActiveTransactionEntity deleteByActiveTransactionId(Long id);
 }

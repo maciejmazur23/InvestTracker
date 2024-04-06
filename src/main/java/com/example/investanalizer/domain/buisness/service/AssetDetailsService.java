@@ -1,9 +1,10 @@
-package com.example.investanalizer.domain.buisness.managment.service;
+package com.example.investanalizer.domain.buisness.service;
 
 import com.example.investanalizer.domain.objects.Asset;
 import com.example.investanalizer.domain.objects.AssetDetails;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface AssetDetailsService {
@@ -11,11 +12,11 @@ public interface AssetDetailsService {
 
     List<AssetDetails> getAllAssetDetails();
 
-    Optional<AssetDetails> findByTicker(String ticker);
+    Optional<AssetDetails> findAssetDetailsByTicker(String ticker);
 
-    Optional<AssetDetails> findById(Long id);
+    Optional<AssetDetails> findAssetDetailsById(Long id);
 
-    List<AssetDetails> getDetailsOfList(List<Asset> assets);
+    Map<Asset, AssetDetails> getAssetDetailsFromAssetsList(List<Asset> assets);
 
-    Optional<AssetDetails> getByTicker(String ticker);
+    void deleteAssetDetailsById(Long id);
 }

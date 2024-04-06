@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AssetDetailsDao {
-    Optional<AssetDetails> findByTicker(String ticker);
+    Optional<AssetDetails> findAssetDetailsByTicker(String ticker);
 
     AssetDetails saveAssetDetails(AssetDetails assetDetails);
 
-    List<AssetDetails> findAll();
+    List<AssetDetails> findAllAssetDetails();
 
-    Optional<AssetDetails> findById(Long id);
+    Optional<AssetDetails> findAssetDetailsById(Long id);
+
+    void deleteAssetDetailsById(Long id);
 }
