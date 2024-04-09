@@ -10,9 +10,9 @@ Invest Tracker is an application for recording and analyzing your investments. I
 - Hibernate
 - Swagger
 - Docker
-- Alpha Vantage
+- Alpha Vantage API
 
-## Features
+## TODO
 
 - Frontend
 - Generate historical reports of portfolio performance in Excel and PDF
