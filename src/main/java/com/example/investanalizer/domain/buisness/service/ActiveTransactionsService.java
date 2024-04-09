@@ -9,10 +9,6 @@ import java.util.Optional;
 public interface ActiveTransactionsService {
     Optional<ActiveTransaction> deleteActiveTransactionById(Long id);
 
-    List<ActiveTransaction> getActiveTransactions();
-
-    List<ActiveTransaction> findActiveTransactionByTicker(String ticker);
-
     List<ActiveTransaction> findAllActiveTransactions();
 
     Optional<ActiveTransaction> saveActiveTransaction(ActiveTransaction activeTransaction);

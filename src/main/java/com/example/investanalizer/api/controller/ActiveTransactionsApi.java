@@ -34,7 +34,7 @@ public class ActiveTransactionsApi {
     @GetMapping()
     ResponseEntity<List<ActiveTransactionDTO>> getActiveTransactions() {
         return ResponseEntity.ok(
-                service.getActiveTransactions().stream()
+                service.findAllActiveTransactions().stream()
                         .map(mapper::mapToDTO)
                         .peek(dto -> log.info("ActiveTransaction: {}", dto))
                         .toList()

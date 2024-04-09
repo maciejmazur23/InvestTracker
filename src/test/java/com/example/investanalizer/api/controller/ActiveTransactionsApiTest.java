@@ -37,6 +37,7 @@ class ActiveTransactionsApiTest {
 
     @MockBean
     private ActiveTransactionDtoMapper mapper;
+
     @MockBean
     private ActiveTransactionsService service;
 
@@ -87,7 +88,7 @@ class ActiveTransactionsApiTest {
         for (int i = 0; i < size; i++) {
             when(mapper.mapToDTO(activeTransactions.get(i))).thenReturn(activeTransactionDTOS.get(i));
         }
-        when(service.getActiveTransactions()).thenReturn(activeTransactions);
+        when(service.findAllActiveTransactions()).thenReturn(activeTransactions);
 
         //when, then
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(ActiveTransactionsApi.ACTIVE_TRANSACTION_API)

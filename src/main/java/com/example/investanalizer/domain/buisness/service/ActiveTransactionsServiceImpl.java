@@ -5,7 +5,6 @@ import com.example.investanalizer.domain.buisness.service.mapper.ActiveToTransac
 import com.example.investanalizer.domain.objects.ActiveTransaction;
 import com.example.investanalizer.domain.objects.Transaction;
 import com.example.investanalizer.domain.objects.enums.TRANSACTION_TYPE;
-import com.example.investanalizer.infrastructure.database.entities.ActiveTransactionEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,7 @@ public class ActiveTransactionsServiceImpl implements ActiveTransactionsService 
     private final ActiveToTransactionMapper activeToTransactionMapper;
 
     @Override
-    public Optional<ActiveTransaction> deleteActiveTransactionById(Long id) {
+    public Optional<ActiveTransaction> deleteActiveTransactionById(Long id){
         Optional<ActiveTransaction> activeTransactionsDaoById = activeTransactionsDao.findActiveTransactionById(id);
         if (activeTransactionsDaoById.isEmpty()) throw new RuntimeException("Active transaction not exist!");
 
@@ -49,21 +48,6 @@ public class ActiveTransactionsServiceImpl implements ActiveTransactionsService 
             log.error("Cannot save transaction: {}", e.getMessage());
         }
         return Optional.of(deleted);
-    }
-
-    @Override
-    public List<ActiveTransaction> getActiveTransactions() {
-        return activeTransactionsDao.findAllActiveTransactions();
-    }
-
-    @Override
-    public List<ActiveTransaction> findActiveTransactionByTicker(String ticker) {
-        try {
-            return activeTransactionsDao.findActiveTransactionByTicker(ticker);
-        } catch (Exception e) {
-            log.error("Cannot find active transaction by ticker: {}", e.getMessage());
-            throw new RuntimeException("Cannot find active transaction by ticker!");
-        }
     }
 
     @Override

@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.example.investanalizer.someTestData.ActiveTransactionsTestData.getSomeActiveTransactionEntities;
-import static com.example.investanalizer.someTestData.ActiveTransactionsTestData.getSomeActiveTransactions;
 
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.yml")
