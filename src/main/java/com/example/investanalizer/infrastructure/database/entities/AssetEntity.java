@@ -15,22 +15,21 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "ASSETS")
 public class AssetEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "asset_id")
-    Long assetId;
+    private Long assetId;
 
-    @Column(name = "asset_details_id", unique = true)
-    AssetDetailsEntity assetDetailsId;
+    @Column(name = "asset_details_id")
+    private Long assetDetailsId;
 
     @Column(name = "quantity")
-    BigDecimal quantity;
+    private BigDecimal quantity;
 
     @Column(name = "course")
-    BigDecimal course;
+    private BigDecimal course;
 
     @Column(name = "totalValue")
-    BigDecimal totalValue;
+    private BigDecimal totalValue;
 
 }

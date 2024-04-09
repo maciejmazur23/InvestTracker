@@ -16,25 +16,23 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "HISTORICAL_ASSETS")
 public class HistoricalAssetEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "asset_id")
-    Long assetId;
+    private Long assetId;
 
-    @Column(name = "asset_details_id", unique = true)
-    AssetDetailsEntity assetDetailsId;
+    @Column(name = "asset_details_id")
+    private Long assetDetailsId;
 
     @Column(name = "quantity")
-    BigDecimal quantity;
+    private BigDecimal quantity;
 
     @Column(name = "course")
-    BigDecimal course;
+    private BigDecimal course;
 
     @Column(name = "total_value")
-    BigDecimal totalValue;
+    private BigDecimal totalValue;
 
     @Column(name = "historical_date")
-    LocalDate historicalDate;
-
+    private LocalDate historicalDate;
 }

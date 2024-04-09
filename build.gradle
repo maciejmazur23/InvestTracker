@@ -1,7 +1,8 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.1.5'
-    id 'io.spring.dependency-management' version '1.1.3'
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+    id "org.openapi.generator" version "${openapiGeneratorVersion}"
 }
 
 group = 'com.example'
@@ -19,25 +20,46 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
+    //spring
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation "org.springframework.boot:spring-boot-starter-validation:${springBootValidationVersion}"
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation "org.flywaydb:flyway-database-postgresql:10.0.1"
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    //api
+    implementation "com.github.crazzyghost:alphavantage-java:${alphaVantageVersion}"
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocOpenApiVersion}"
+
+    //db
     implementation 'org.flywaydb:flyway-core'
-    implementation 'org.mapstruct:mapstruct:1.5.3.Final'
-
-    compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
-    annotationProcessor 'org.projectlombok:lombok'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 
+    //annotations
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.boot:spring-boot-testcontainers'
-//    testImplementation 'org.testcontainers:junit-jupiter'
-//    testImplementation 'org.testcontainers:postgresql'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:postgresql'
+
+    testImplementation "org.slf4j:slf4j-api:${wiremockSlf4jVersion}"
+    testImplementation "com.github.tomakehurst:wiremock-standalone:${wiremockVersion}"
+    testImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+    }
 }
 
 tasks.named('bootBuildImage') {
@@ -46,4 +68,11 @@ tasks.named('bootBuildImage') {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
